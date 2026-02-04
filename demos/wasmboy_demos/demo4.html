@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Red - WasmBoy Emulator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: transparent;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            width: fit-content;
+            margin: 0 auto;
+            max-width: 100%;
+            max-height: 100vh;
+            overflow: auto;
+        }
+
+        body.fullsize .container {
+            width: 100%;
+            height: 100vh;
+            max-width: 100%;
+            max-height: 100vh;
+            margin: 0;
+            border-radius: 0;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.fullsize .main-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.fullsize .emulator-section {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.fullsize .canvas-container {
+            flex: 1;
+            width: 100%;
+            height: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0;
+        }
+
+        body.fullsize #gameCanvas {
+            width: min(100vw, calc(100vh * 10 / 9));
+            height: min(100vh, calc(100vw * 9 / 10));
+            max-width: 100%;
+            max-height: 100%;
+            aspect-ratio: 10 / 9;
+        }
+
+        .main-content {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            width: fit-content;
+        }
+
+        .emulator-section {
+            flex: 0 0 auto;
+            min-width: 0;
+        }
+
+        .memory-section {
+            min-width: 400px;
+        }
+
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #764ba2;
+            color: white;
+        }
+
+        .btn-success {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #f56565;
+            color: white;
+        }
+
+        .btn-turbo {
+            background: #ed8936;
+            color: white;
+        }
+
+        .btn-turbo.active {
+            background: #c05621;
+            box-shadow: 0 0 10px rgba(237, 137, 54, 0.5);
+        }
+
+        .btn-memory {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-memory.disabled {
+            background: #a0aec0;
+            opacity: 0.7;
+        }
+
+        .canvas-container {
+            display: flex;
+            justify-content: center;
+            background: #000;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        canvas {
+            width: 320px;
+            height: 288px;
+            max-width: 100%;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-label {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #48bb78;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .file-label:hover {
+            background: #38a169;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .info {
+            background: #edf2f7;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #4a5568;
+        }
+
+        .info strong {
+            color: #2d3748;
+        }
+
+        .memory-viewer {
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 10px;
+            background: #f7fafc;
+            height: 250px;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+
+        .memory-viewer:last-child {
+            margin-bottom: 0;
+        }
+
+        .memory-viewer-content {
+            overflow-y: auto;
+            height: calc(100% - 35px);
+            max-height: calc(100vh - 200px);
+        }
+
+        #memoryDump {
+            overflow-y: auto;
+        }
+
+        .memory-viewer-header {
+            margin-bottom: 10px;
+        }
+
+        .goto-widget {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .goto-widget label {
+            font-size: 12px;
+            color: #4a5568;
+            font-weight: 600;
+        }
+
+        .goto-widget input {
+            padding: 6px 10px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            width: 100px;
+        }
+
+        .goto-widget input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .goto-widget button {
+            padding: 6px 12px;
+            font-size: 12px;
+            border: none;
+            border-radius: 4px;
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .goto-widget button:hover {
+            background: #5568d3;
+        }
+
+        .memory-viewer-content {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        #memoryDump {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .memory-row {
+            display: flex;
+            margin-bottom: 2px;
+            align-items: center;
+        }
+
+        .memory-address {
+            color: #667eea;
+            font-weight: bold;
+            width: 65px;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+
+        .memory-bytes {
+            display: flex;
+            gap: 2px;
+            flex-wrap: nowrap;
+        }
+
+        .memory-byte {
+            width: 24px;
+            text-align: center;
+            color: #2d3748;
+            flex-shrink: 0;
+            font-size: 12px;
+        }
+
+        .memory-byte.changed {
+            background: #fed7d7;
+            animation: highlight 0.5s;
+        }
+
+        @keyframes highlight {
+            from { background: #feb2b2; }
+            to { background: #fed7d7; }
+        }
+
+
+        .toggle-icon {
+            transition: transform 0.3s;
+        }
+
+        .toggle-icon.collapsed {
+            transform: rotate(-90deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="main-content">
+            <div class="emulator-section">
+                <div class="canvas-container">
+                    <canvas id="gameCanvas"></canvas>
+                </div>
+
+                <div class="button-group" style="justify-content: center; margin-top: 15px;">
+                    <button id="playPauseBtn" class="btn-success" disabled>Play</button>
+                    <button id="turboBtn" class="btn-turbo" disabled>⚡ Turbo (2x)</button>
+                    <button id="memoryToggleBtn" class="btn-memory" disabled>📊 Memory: ON</button>
+                </div>
+            </div>
+
+            <div class="memory-section">
+                <div class="memory-viewer">
+                    <div class="memory-viewer-header">
+                        <div class="goto-widget">
+                            <label for="gotoAddress1">Goto:</label>
+                            <input type="text" id="gotoAddress1" placeholder="0xC000" maxlength="6">
+                            <button id="gotoButton1">Go</button>
+                        </div>
+                    </div>
+                    <div class="memory-viewer-content" id="memoryViewerContent1">
+                        <div id="memoryDump1"></div>
+                    </div>
+                </div>
+                <div class="memory-viewer">
+                    <div class="memory-viewer-header">
+                        <div class="goto-widget">
+                            <label for="gotoAddress2">Goto:</label>
+                            <input type="text" id="gotoAddress2" placeholder="0xC000" maxlength="6">
+                            <button id="gotoButton2">Go</button>
+                        </div>
+                    </div>
+                    <div class="memory-viewer-content" id="memoryViewerContent2">
+                        <div id="memoryDump2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check query string for fullSize parameter
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('fullSize') === '1') {
+                // Add fullsize class to body
+                document.body.classList.add('fullsize');
+                // Hide memory section
+                const memorySection = document.querySelector('.memory-section');
+                if (memorySection) {
+                    memorySection.style.display = 'none';
+                }
+            }
+        })();
+    </script>
+    <script type="module">
+        import { WasmBoy } from './node_modules/wasmboy/dist/wasmboy.wasm.esm.js';
+        
+        // Create our own idb keyval instance using native IndexedDB (same as wasmboy uses)
+        const dbPromise = new Promise((resolve, reject) => {
+            const request = indexedDB.open('wasmboy', 1);
+            request.onerror = () => reject(request.error);
+            request.onsuccess = () => resolve(request.result);
+            request.onupgradeneeded = (event) => {
+                const db = event.target.result;
+                if (!db.objectStoreNames.contains('keyval')) {
+                    db.createObjectStore('keyval');
+                }
+            };
+        });
+        
+        const idbKeyval = {
+            get(key) {
+                return dbPromise.then(db => {
+                    return new Promise((resolve, reject) => {
+                        const tx = db.transaction('keyval');
+                        const store = tx.objectStore('keyval');
+                        const request = store.get(key);
+                        request.onsuccess = () => resolve(request.result);
+                        request.onerror = () => reject(request.error);
+                    });
+                });
+            },
+            set(key, val) {
+                return dbPromise.then(db => {
+                    return new Promise((resolve, reject) => {
+                        const tx = db.transaction('keyval', 'readwrite');
+                        tx.oncomplete = () => resolve();
+                        tx.onerror = () => reject(tx.error);
+                        const store = tx.objectStore('keyval');
+                        store.put(val, key);
+                    });
+                });
+            },
+            keys() {
+                return dbPromise.then(db => {
+                    return new Promise((resolve, reject) => {
+                        const tx = db.transaction('keyval');
+                        const keys = [];
+                        const store = tx.objectStore('keyval');
+                        const cursorRequest = (store.iterateKeyCursor || store.iterateCursor).call(store);
+                        cursorRequest.onsuccess = (event) => {
+                            const cursor = event.target.result;
+                            if (cursor) {
+                                keys.push(cursor.key);
+                                cursor.continue();
+                            } else {
+                                resolve(keys);
+                            }
+                        };
+                        cursorRequest.onerror = () => reject(cursorRequest.error);
+                    });
+                });
+            },
+            delete(key) {
+                return dbPromise.then(db => {
+                    return new Promise((resolve, reject) => {
+                        const tx = db.transaction('keyval', 'readwrite');
+                        tx.oncomplete = () => resolve();
+                        tx.onerror = () => reject(tx.error);
+                        const store = tx.objectStore('keyval');
+                        store.delete(key);
+                    });
+                });
+            }
+        };
+
+        const canvas = document.getElementById('gameCanvas');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const turboBtn = document.getElementById('turboBtn');
+        const memoryToggleBtn = document.getElementById('memoryToggleBtn');
+
+        let isReady = false;
+        let romLoaded = false;
+        let cartridgeHeader = null;
+        let turboMode = true; // Enable turbo by default
+        let memoryViewerInterval = null;
+        let previousMemory = null;
+        let isPlaying = false;
+        let memoryViewerEnabled = false; // Disable memory watcher by default
+        
+        // Demo-specific identifier to separate save data
+        const DEMO_NUMBER = 4;
+        
+        // Get demo-specific save key
+        function getSaveKey(header) {
+            return header ? `${header}_demo${DEMO_NUMBER}` : null;
+        }
+
+        async function initializeWasmBoy() {
+            try {
+                await WasmBoy.config({
+                    isGbcEnabled: true,
+                    isGbcColorizationEnabled: true,
+                    isAudioEnabled: false, // Disable sound by default
+                    gameboyFrameRate: 60,
+                    enableBootROMIfAvailable: false
+                });
+
+                await WasmBoy.setCanvas(canvas);
+                
+                // Disable default joypad to set custom key mappings
+                WasmBoy.disableDefaultJoypad();
+                
+                // Set custom key mappings
+                const ResponsiveGamepad = WasmBoy.ResponsiveGamepad;
+                const INPUTS = ResponsiveGamepad.RESPONSIVE_GAMEPAD_INPUTS;
+                
+                // D-Pad: Arrow keys (already default, but set explicitly)
+                ResponsiveGamepad.Keyboard.setKeysToResponsiveGamepadInput(["ArrowUp"], INPUTS.DPAD_UP);
+                ResponsiveGamepad.Keyboard.setKeysToResponsiveGamepadInput(["ArrowRight"], INPUTS.DPAD_RIGHT);
+                ResponsiveGamepad.Keyboard.setKeysToResponsiveGamepadInput(["ArrowDown"], INPUTS.DPAD_DOWN);
+                ResponsiveGamepad.Keyboard.setKeysToResponsiveGamepadInput(["ArrowLeft"], INPUTS.DPAD_LEFT);
+                
+                // A: W key (map both KeyW and KeyZ for AZERTY/QWERTY compatibility)
+                // On AZERTY: KeyZ is where KeyW is on QWERTY
+                ResponsiveGamepad.Keyboard.setKeysToResponsiveGamepadInput(["KeyW", "KeyZ"], INPUTS.A);
+                
+                // B: X key
+                ResponsiveGamepad.Keyboard.setKeysToResponsiveGamepadInput(["KeyX"], INPUTS.B);
+                
+                // START: Enter (already default)
+                ResponsiveGamepad.Keyboard.setKeysToResponsiveGamepadInput(["Enter"], INPUTS.START);
+                
+                // SELECT: Backspace
+                ResponsiveGamepad.Keyboard.setKeysToResponsiveGamepadInput(["Backspace"], INPUTS.SELECT);
+                
+                // Enable the joypad with custom mappings
+                WasmBoy.enableDefaultJoypad();
+
+                isReady = true;
+                
+                // Auto-load ROM and save
+                autoLoadROMAndSave();
+            } catch (error) {
+                console.error('Error initializing WasmBoy:', error);
+            }
+        }
+
+
+        async function loadSaveFile(file) {
+            if (!romLoaded) {
+                return;
+            }
+
+            if (!cartridgeHeader) {
+                return;
+            }
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const saveArray = new Uint8Array(arrayBuffer);
+
+                // Get the cartridge object from IndexedDB using demo-specific key
+                const saveKey = getSaveKey(cartridgeHeader);
+                const cartridgeObject = await idbKeyval.get(saveKey);
+                
+                if (!cartridgeObject) {
+                    throw new Error('Cartridge not found in IndexedDB');
+                }
+
+                // Update the cartridge RAM with the save file data
+                cartridgeObject.cartridgeRam = saveArray;
+                
+                // Save it back to IndexedDB using demo-specific key
+                await idbKeyval.set(saveKey, cartridgeObject);
+                
+                // Pause and reset
+                await WasmBoy.pause();
+                isPlaying = false;
+                updatePlayPauseButton();
+                await WasmBoy.reset();
+                
+                // Reload the ROM (this will automatically load the RAM from IndexedDB)
+                const response = await fetch('./pokered.gbc');
+                const romArray = new Uint8Array(await response.arrayBuffer());
+                await WasmBoy.loadROM(romArray);
+            } catch (error) {
+                console.error('Error loading save file:', error);
+            }
+        }
+
+
+        function updatePlayPauseButton() {
+            if (isPlaying) {
+                playPauseBtn.textContent = 'Pause';
+                playPauseBtn.className = 'btn-danger';
+            } else {
+                playPauseBtn.textContent = 'Play';
+                playPauseBtn.className = 'btn-success';
+            }
+        }
+
+        async function togglePlayPause() {
+            try {
+                if (isPlaying) {
+                    await WasmBoy.pause();
+                    isPlaying = false;
+                } else {
+                    await WasmBoy.play();
+                    isPlaying = true;
+                }
+                updatePlayPauseButton();
+            } catch (error) {
+                console.error('Error toggling play/pause:', error);
+            }
+        }
+
+        async function toggleTurbo() {
+            try {
+                turboMode = !turboMode;
+                if (turboMode) {
+                    await WasmBoy.setSpeed(2.0); // 2x speed
+                    turboBtn.classList.add('active');
+                    turboBtn.textContent = '⚡ Turbo (2x) ON';
+                } else {
+                    await WasmBoy.setSpeed(1.0); // Normal speed
+                    turboBtn.classList.remove('active');
+                    turboBtn.textContent = '⚡ Turbo (2x)';
+                }
+            } catch (error) {
+                console.error('Error toggling turbo:', error);
+            }
+        }
+
+        function toggleMemoryViewer() {
+            memoryViewerEnabled = !memoryViewerEnabled;
+            
+            if (memoryViewerEnabled) {
+                // Enable memory viewer updates
+                memoryToggleBtn.classList.remove('disabled');
+                memoryToggleBtn.textContent = '📊 Memory: ON';
+                
+                // Start updating if ROM is loaded
+                if (romLoaded && !memoryViewerInterval) {
+                    updateMemoryViewer();
+                    memoryViewerInterval = setInterval(updateMemoryViewer, 100);
+                }
+            } else {
+                // Disable memory viewer updates
+                memoryToggleBtn.classList.add('disabled');
+                memoryToggleBtn.textContent = '📊 Memory: OFF';
+                
+                // Stop updating
+                if (memoryViewerInterval) {
+                    clearInterval(memoryViewerInterval);
+                    memoryViewerInterval = null;
+                }
+            }
+        }
+
+
+        async function autoLoadROMAndSave() {
+            try {
+                // Auto-load ROM
+                const response = await fetch('./pokered.gbc');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch pokered.gbc');
+                }
+                const arrayBuffer = await response.arrayBuffer();
+                const romArray = new Uint8Array(arrayBuffer);
+
+                await WasmBoy.loadROM(romArray);
+                
+                // Save the cartridge to IndexedDB to get the header
+                await WasmBoy.saveLoadedCartridge();
+                
+                // Get the cartridge header from saved memory
+                const savedMemory = await WasmBoy.getSavedMemory();
+                if (savedMemory && savedMemory.length > 0) {
+                    const cartridge = savedMemory[0];
+                    if (cartridge && cartridge.cartridgeInfo && cartridge.cartridgeInfo.header) {
+                        cartridgeHeader = cartridge.cartridgeInfo.header;
+                        
+                        // Copy cartridge data to demo-specific key to separate saves
+                        const saveKey = getSaveKey(cartridgeHeader);
+                        if (saveKey) {
+                            const originalCartridge = await idbKeyval.get(cartridgeHeader);
+                            if (originalCartridge) {
+                                // Create a deep copy for this demo (handles Uint8Array properly)
+                                const copiedCartridge = {
+                                    ...originalCartridge,
+                                    cartridgeRam: originalCartridge.cartridgeRam ? new Uint8Array(originalCartridge.cartridgeRam) : null
+                                };
+                                await idbKeyval.set(saveKey, copiedCartridge);
+                            }
+                        }
+                    }
+                }
+                
+                romLoaded = true;
+
+                // Auto-load save file
+                try {
+                    // Add cache-busting to ensure we get the latest save file
+                    const saveResponse = await fetch('./demos/4/pokered.sav?' + Date.now(), { cache: 'no-store' });
+                    if (saveResponse.ok) {
+                        const saveArrayBuffer = await saveResponse.arrayBuffer();
+                        const saveArray = new Uint8Array(saveArrayBuffer);
+
+                        if (cartridgeHeader) {
+                            // Get the cartridge object from IndexedDB using demo-specific key
+                            const saveKey = getSaveKey(cartridgeHeader);
+                            
+                            // Clear old demo-specific entry to ensure fresh start
+                            await idbKeyval.delete(saveKey);
+                            
+                            // Get the original cartridge object (or create new structure)
+                            let cartridgeObject = await idbKeyval.get(cartridgeHeader);
+                            
+                            if (!cartridgeObject) {
+                                // If no cartridge exists, create a basic structure
+                                cartridgeObject = {
+                                    cartridgeRam: null
+                                };
+                            } else {
+                                // Create a fresh copy for this demo
+                                cartridgeObject = {
+                                    ...cartridgeObject,
+                                    cartridgeRam: cartridgeObject.cartridgeRam ? new Uint8Array(cartridgeObject.cartridgeRam) : null
+                                };
+                            }
+                            
+                            // Update the cartridge RAM with the new save file data
+                            cartridgeObject.cartridgeRam = saveArray;
+                            
+                            // Save to both demo-specific key and original key (for WasmBoy to load)
+                            await idbKeyval.set(saveKey, cartridgeObject);
+                            await idbKeyval.set(cartridgeHeader, cartridgeObject);
+
+                            // Reload the ROM to apply the save
+                            await WasmBoy.pause();
+                            await WasmBoy.reset();
+                            
+                            // Reload the ROM (this will automatically load the RAM from IndexedDB)
+                            await WasmBoy.loadROM(romArray);
+                            
+                            // After loading, ensure future saves go to demo-specific key
+                            // Copy back to demo-specific key after WasmBoy potentially updates it
+                            const updatedCartridge = await idbKeyval.get(cartridgeHeader);
+                            if (updatedCartridge) {
+                                await idbKeyval.set(saveKey, {
+                                    ...updatedCartridge,
+                                    cartridgeRam: updatedCartridge.cartridgeRam ? new Uint8Array(updatedCartridge.cartridgeRam) : null
+                                });
+                            }
+                            
+                            // Auto-play the game
+                            await WasmBoy.play();
+                            isPlaying = true;
+                            updatePlayPauseButton();
+                        } else {
+                            // Auto-play even without save
+                            await WasmBoy.play();
+                            isPlaying = true;
+                            updatePlayPauseButton();
+                        }
+                    } else {
+                        // Auto-play even without save
+                        await WasmBoy.play();
+                        isPlaying = true;
+                        updatePlayPauseButton();
+                    }
+                } catch (saveError) {
+                    console.log('Save file not found or error loading:', saveError);
+                    // Auto-play even without save
+                    await WasmBoy.play();
+                    isPlaying = true;
+                    updatePlayPauseButton();
+                }
+
+                playPauseBtn.disabled = false;
+                turboBtn.disabled = false;
+                memoryToggleBtn.disabled = false;
+                
+                // Enable turbo mode by default
+                try {
+                    await WasmBoy.setSpeed(2.0); // 2x speed
+                    turboBtn.classList.add('active');
+                    turboBtn.textContent = '⚡ Turbo (2x) ON';
+                } catch (error) {
+                    console.error('Error enabling turbo:', error);
+                }
+                
+                // Set memory viewer button state (disabled by default)
+                memoryToggleBtn.classList.add('disabled');
+                memoryToggleBtn.textContent = '📊 Memory: OFF';
+                
+                // Start memory viewer updates after ROM loads (if enabled)
+                if (memoryViewerEnabled && !memoryViewerInterval) {
+                    updateMemoryViewer();
+                    memoryViewerInterval = setInterval(updateMemoryViewer, 100);
+                }
+            } catch (error) {
+                console.error('Error auto-loading ROM:', error);
+            }
+        }
+
+        async function updateMemoryViewer() {
+            if (!romLoaded || !memoryViewerEnabled) return;
+
+            try {
+                // WRAM is at Game Boy addresses 0xC000-0xDFFF (8KB = 8192 bytes)
+                // Get the WORK_RAM_LOCATION constant from WasmBoy
+                const workRamLocation = await WasmBoy._getWasmConstant('WORK_RAM_LOCATION');
+                
+                // WRAM Bank 0: 0xC000-0xCFFF (4KB = 0x1000 bytes) - always accessible
+                // WRAM Bank 1-7: 0xD000-0xDFFF (4KB = 0x1000 bytes) - switchable in GBC
+                // We'll read 8KB (0x2000 bytes) to cover both banks
+                // Note: In GBC mode, bank 1-7 are switchable, but we'll show bank 1 by default
+                
+                const wramStart = workRamLocation; // WRAM starts at WORK_RAM_LOCATION
+                const wramEnd = wramStart + 0x2000; // 8KB = 0x2000 bytes (covers 0xC000-0xDFFF)
+                
+                const memory = await WasmBoy._getWasmMemorySection(wramStart, wramEnd);
+                
+                if (!memory || memory.length === 0) {
+                    document.getElementById('memoryDump1').textContent = 'Memory not available';
+                    document.getElementById('memoryDump2').textContent = 'Memory not available';
+                    return;
+                }
+
+                // Update both memory viewers with the same data
+                updateMemoryDump('memoryDump1', memory, 0xC000);
+                updateMemoryDump('memoryDump2', memory, 0xC000);
+                
+                previousMemory = new Uint8Array(memory);
+            } catch (error) {
+                console.error('Error updating memory viewer:', error);
+                document.getElementById('memoryDump1').textContent = 'Error: ' + error.message;
+                document.getElementById('memoryDump2').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        function updateMemoryDump(dumpId, memory, startAddress) {
+            // Format as hex dump
+            let html = '';
+            const bytesPerRow = 16;
+            
+            for (let i = 0; i < memory.length; i += bytesPerRow) {
+                const address = startAddress + i;
+                const row = memory.slice(i, Math.min(i + bytesPerRow, memory.length));
+                
+                html += '<div class="memory-row">';
+                html += `<span class="memory-address">0x${address.toString(16).toUpperCase().padStart(4, '0')}</span>`;
+                html += '<span class="memory-bytes">';
+                
+                // Display bytes
+                for (let j = 0; j < bytesPerRow; j++) {
+                    if (j < row.length) {
+                        const byte = row[j];
+                        const byteIndex = i + j;
+                        const changed = previousMemory && previousMemory[byteIndex] !== byte;
+                        html += `<span class="memory-byte ${changed ? 'changed' : ''}">${byte.toString(16).toUpperCase().padStart(2, '0')}</span>`;
+                    } else {
+                        html += '<span class="memory-byte" style="visibility: hidden;">00</span>';
+                    }
+                }
+                
+                html += '</span>';
+                html += '</div>';
+            }
+            
+            document.getElementById(dumpId).innerHTML = html;
+        }
+
+
+        function gotoAddress(viewerNumber) {
+            const input = document.getElementById(`gotoAddress${viewerNumber}`);
+            const addressStr = input.value.trim();
+            
+            if (!addressStr) return;
+            
+            // Parse address (support hex with 0x prefix or without)
+            let address;
+            if (addressStr.startsWith('0x') || addressStr.startsWith('0X')) {
+                address = parseInt(addressStr, 16);
+            } else {
+                address = parseInt(addressStr, 16);
+            }
+            
+            // Validate address is within WRAM range (0xC000-0xDFFF)
+            if (isNaN(address) || address < 0xC000 || address > 0xDFFF) {
+                alert('Invalid address! Please enter an address between 0xC000 and 0xDFFF');
+                return;
+            }
+            
+            // Calculate which row this address is on
+            const wramStart = 0xC000;
+            const offset = address - wramStart;
+            const bytesPerRow = 16;
+            const rowIndex = Math.floor(offset / bytesPerRow);
+            
+            // Find the memory row element and scroll to it
+            const memoryDump = document.getElementById(`memoryDump${viewerNumber}`);
+            const rows = memoryDump.querySelectorAll('.memory-row');
+            
+            if (rows[rowIndex]) {
+                rows[rowIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Highlight the row briefly
+                rows[rowIndex].style.backgroundColor = '#fef5e7';
+                setTimeout(() => {
+                    rows[rowIndex].style.backgroundColor = '';
+                }, 1000);
+            }
+        }
+
+        // Event listeners
+        playPauseBtn.addEventListener('click', togglePlayPause);
+        turboBtn.addEventListener('click', toggleTurbo);
+        memoryToggleBtn.addEventListener('click', toggleMemoryViewer);
+        
+        // Goto buttons for both viewers
+        document.getElementById('gotoButton1').addEventListener('click', () => gotoAddress(1));
+        document.getElementById('gotoAddress1').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                gotoAddress(1);
+            }
+        });
+        
+        document.getElementById('gotoButton2').addEventListener('click', () => gotoAddress(2));
+        document.getElementById('gotoAddress2').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                gotoAddress(2);
+            }
+        });
+
+        // Initialize
+        initializeWasmBoy();
+    </script>
+</body>
+</html>
+
+</html>

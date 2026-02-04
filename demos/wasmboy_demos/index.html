@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Red - WasmBoy Emulator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: #f0f0f0;
+        }
+        .redirect-message {
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="redirect-message">
+        <p>Redirecting to the correct demo...</p>
+    </div>
+    <script>
+        // Get the current port from window.location.port
+        const port = parseInt(window.location.port) || (window.location.protocol === 'https:' ? 443 : 80);
+        
+        // Map ports to demo files
+        const portToDemo = {
+            8080: 'demo1.html',
+            8081: 'demo2.html',
+            8082: 'demo3.html',
+            8083: 'demo4.html'
+        };
+        
+        // Get the demo file based on port, default to demo1.html if port not found
+        const demoFile = portToDemo[port] || 'demo1.html';
+        
+        // Redirect to the appropriate demo file
+        // Preserve query string if present
+        const queryString = window.location.search;
+        window.location.href = demoFile + queryString;
+    </script>
+</body>
+</html>

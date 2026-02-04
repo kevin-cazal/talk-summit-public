@@ -1,0 +1,1152 @@
+<html lang="en" class="reveal-full-page"><head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<!-- <link rel="stylesheet" href="dist/theme/black.css"> -->
+	<link rel="stylesheet" href="dist/theme/retro-glitch.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+</head>
+
+
+<body class="reveal-viewport" style="--slide-width: 960px; --slide-height: 700px; --slide-scale: 1.003; --viewport-width: 1003px; --viewport-height: 925px;">
+	<div class="reveal slide center focused has-vertical-slides has-horizontal-slides ready" role="application" data-transition-speed="default" data-background-transition="fade" style="cursor: none;">
+		<div class="slides" style="width: 960px; height: 700px; inset: 50% auto auto 50%; transform: translate(-50%, -50%) scale(1.003);">
+			<section id="title">
+				<h1 class="glitch" data-text="BUG or FEATURE">BUG or FEATURE</h1>
+				<h1 class="glitch" data-text="?">?</h1>
+				<h3 class="glitch" data-text="Kevin Cazal">Kevin Cazal</h3>
+				<h4 class="glitch" data-text="Epitech Summit - 02/2026">Epitech Summit - 02/2026</h4>
+				<h5 class="blink">PRESS START</h5>
+			</section>
+			<section id="back-in-the-90s">
+
+				<section id="back-in-the-90s-intro">
+					<h2>Back in the 90's</h2>
+				</section>
+
+				<section id="back-in-the-90s-arcade">
+					<div>
+						<p class="fragment" data-fragment-index="0">Smell of sweat and cigarette</p>
+						<p class="fragment" data-fragment-index="1">Neon lights</p>
+						<p class="fragment" data-fragment-index="2">Arcade</p>
+						<p class="fragment" data-fragment-index="3"><img src="img/pacman_anim.gif"></p>
+					</div>
+				</section>
+
+				<section id="back-in-the-90s-gameplay">
+					<img src="img/pacman gameplay.png">
+				</section>
+
+				<section id="back-in-the-90s-levels">
+					<p class="fragment" data-fragment-index="0">Level 1</p>
+					<p class="fragment" data-fragment-index="1">Level 2</p>
+					<p class="fragment" data-fragment-index="2">Level 3</p>
+					<p class="fragment" data-fragment-index="3">...</p>
+					<p class="fragment" data-fragment-index="4">Level 13</p>
+					<p class="fragment" data-fragment-index="5">...</p>
+					<p class="fragment" data-fragment-index="6">Level 20</p>
+					<p class="fragment" data-fragment-index="7">You're quite good at this game</p>
+				</section>
+
+				<section id="back-in-the-90s-level-display">
+					<div class="r-stack">
+						<img height="100%" src="img/pacman gameplay.png">
+						<img class="fragment" src="img/pacman_level.png" data-fragment-index="0">
+					</div>
+				</section>
+
+				<section id="back-in-the-90s-level-255">
+					<p class="fragment" data-fragment-index="0">Continuing to level <span class="fragment" data-fragment-index="1">50</span><span class="fragment" data-fragment-index="2">...100</span><span class="fragment" data-fragment-index="3">...200</span><span class="fragment" data-fragment-index="4">...255</span></p>
+					<h4 class="fragment r-fit-text glitch" data-text="And then..." data-fragment-index="5" style="white-space: nowrap; display: inline-block;">And then...</h4>
+				</section>
+
+				<section id="back-in-the-90s-video">
+					<video data-autoplay="" data-lazy-loaded="" data-src="img/pacman256.mp4"></video>
+				</section>
+				<section id="back-in-the-90s-overflow">
+					<h4>Overflow ?</h4>
+					<p class="fragment" data-fragment-index="0">255 + 1<span class="fragment" data-fragment-index="1"> =
+							0?</span></p>
+					<p class="fragment" data-fragment-index="0">In binary: 0b11111111 + 0b00000001<span class="fragment" data-fragment-index="1"> = 0b00000000?</span></p>
+
+
+					<div class="fragment" data-fragment-index="2" style="display: inline-block; font-family: 'Courier New', Courier, monospace; font-size: 2em;">
+						<table class="binary-ripple-table" style="border-collapse: collapse; margin: auto; text-align: center; line-height: 1.2;">
+
+							<tbody><tr style="color: #e06c75; height: 1.2em;">
+								<td>&nbsp;</td>
+								<td class="fragment carry-bit" data-fragment-index="10">1</td>
+								<td class="fragment carry-bit" data-fragment-index="9">1</td>
+								<td class="fragment carry-bit" data-fragment-index="8">1</td>
+								<td class="fragment carry-bit" data-fragment-index="7">1</td>
+								<td class="fragment carry-bit" data-fragment-index="6">1</td>
+								<td class="fragment carry-bit" data-fragment-index="5">1</td>
+								<td class="fragment carry-bit" data-fragment-index="4">1</td>
+								<td class="fragment carry-bit" data-fragment-index="3">1</td>
+								<td class="fragment carry-bit" data-fragment-index="2"> </td>
+								<td>&nbsp;</td>
+							</tr>
+
+							<tr>
+								<td style="text-align: left;">&nbsp;&nbsp;</td>
+								<td class="fragment input-bit" data-fragment-index="10"> </td>
+								<td class="fragment input-bit" data-fragment-index="9">1</td>
+								<td class="fragment input-bit" data-fragment-index="8">1</td>
+								<td class="fragment input-bit" data-fragment-index="7">1</td>
+								<td class="fragment input-bit" data-fragment-index="6">1</td>
+								<td class="fragment input-bit" data-fragment-index="5">1</td>
+								<td class="fragment input-bit" data-fragment-index="4">1</td>
+								<td class="fragment input-bit" data-fragment-index="3">1</td>
+								<td class="fragment input-bit" data-fragment-index="2">1</td>
+								<td>&nbsp;</td>
+							</tr>
+
+							<tr>
+								<td style="text-align: left;">+&nbsp;&nbsp;</td>
+								<td class="fragment input-bit" data-fragment-index="10"> </td>
+								<td class="fragment input-bit" data-fragment-index="9">0</td>
+								<td class="fragment input-bit" data-fragment-index="8">0</td>
+								<td class="fragment input-bit" data-fragment-index="7">0</td>
+								<td class="fragment input-bit" data-fragment-index="6">0</td>
+								<td class="fragment input-bit" data-fragment-index="5">0</td>
+								<td class="fragment input-bit" data-fragment-index="4">0</td>
+								<td class="fragment input-bit" data-fragment-index="3">0</td>
+								<td class="fragment input-bit" data-fragment-index="2">1</td>
+							</tr>
+
+							<tr style="border-top: 2px solid white; color: #98c379;">
+								<td>&nbsp;</td>
+								<td class="fragment result-bit" data-fragment-index="10"> </td>
+								<td class="fragment result-bit" data-fragment-index="9">0</td>
+								<td class="fragment result-bit" data-fragment-index="8">0</td>
+								<td class="fragment result-bit" data-fragment-index="7">0</td>
+								<td class="fragment result-bit" data-fragment-index="6">0</td>
+								<td class="fragment result-bit" data-fragment-index="5">0</td>
+								<td class="fragment result-bit" data-fragment-index="4">0</td>
+								<td class="fragment result-bit" data-fragment-index="3">0</td>
+								<td class="fragment result-bit" data-fragment-index="2">0</td>
+								<td>&nbsp;</td>
+							</tr>
+						</tbody></table>
+					</div>
+				</section>
+
+				<section id="back-in-the-90s-code">
+
+					<p>Level display code oversight</p>
+					<div class="flex-container">
+						<div class="col-half">
+							<pre><code class="language-c ">int main() {
+
+  uint8_t level = 255; 
+  uint16_t fruit_icons[20] = {0};
+  level++; 
+  if (level < 8) {
+    uint8_t draws = level;
+    uint8_t fruit_idx = 0;
+    do {
+      printf("Remaining draws: %d.",
+        draws);
+      draw_fruit(fruit_idx);
+      fruit_idx++;
+      draws--;
+						
+    } while (draws != 0);
+  } else {// Handle high level
+  }
+  return 0;
+}</code></pre>
+						</div>
+						<div class="col-half">
+							<div class="retro-terminal">
+								<p>Remaining draws: 0. Drawing icon[0]</p>
+								<p>Remaining draws: 255. Drawing icon[1]</p>
+								<p>Remaining draws: 254. Drawing icon[2]</p>
+								<p>...</p>
+								<p>Remaining draws: 2. Drawing icon[254]</p>
+								<p>Remaining draws: 1. Drawing icon[255]</p>
+								<p class="prompt"><span class="blinking-cursor">_</span></p>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section id="back-in-the-90s-game-over">
+					<img src="img/pacman_broken.png">
+					<h4 class="glitch" data-text="GAME OVER?">GAME OVER</h4>
+				</section>
+				<section id="back-in-the-90s-feature">
+					<h3>It's a feature!</h3>
+					<img width="50%" src="img/256.jpg">
+					<h6>New game: Pacman 256 - 2016</h6>
+					<img src="img/Pacman256glitchy.webp">
+					<h6>New enemy: Glitchy</h6>
+				</section>
+			</section>
+			<section id="next-level">
+				<section id="next-level-intro">
+					<h1>NEXT LEVEL</h1>
+					<h5 class="blink">PRESS START</h5>
+				</section>
+				<section id="next-level-cool-legendary">
+					<h2>From <span class="glitch glitch-blue" data-text="cool">cool</span> to <span class="glitch glitch-red" data-text="legendary">legendary</span></h2>
+				</section>
+				<section id="next-level-1989">
+					<h4 class="fragment">1989</h4>
+					<p class="fragment">4 MHz CPU</p>
+					<p class="fragment">8 KB of RAM</p>
+					<img class="fragment" width="20%" src="img/gb.png"/>
+				</section>
+				<section id="next-level-best-seller">
+					<h4 class="fragment">Best seller</h4>
+					<p class="fragment">Development: 1990 - <span class="fragment">1996</span></p>
+					<p class="fragment">46 million copies sold</p>
+					<div class="fragment">
+						<video data-autoplay type="video/mp4" src="img/pokeintro.mp4">
+						</video>
+					</div>
+					<p class="fragment">And a LOT of glitches</p>
+					<img class="fragment" src="img/Missingno.png">
+				</section>
+				<section id="next-level-missingno-context">
+					<h4>Missing No: context</h4>
+					<p>A bugged wild Pokémon</p>
+					<p>190 Pokémon planned during development<span class="fragment"> & reserved memory slots</span></p>
+					<p>Only 151 left on release <span class="fragment">& 39 invalid memory slots</span></p>
+				</section>
+
+				<section id="next-level-triggering">
+					<h4>Triggering the Glitch</h4>
+					<p>Step 1: Watch the Pokémon capture tutorial</p>
+					<p>Step 2: Trigger a wild Pokémon encounter on a specific zone</p>
+				</section>
+				<section id="next-level-demo1">
+					<h4>Demo</h4>
+					<iframe id="demo1-iframe" src="" width="100%" height="600px" frameborder="0"></iframe>
+				</section>
+				<section id="next-level-old-man">
+					<img height="50%" width="50%" src="img/oldman.png">
+					<p class="fragment">Copy player's name to <span class="glitch" data-text="temporary">temporary</span> space: $D887</p>
+					<p class="fragment">This <span class="glitch" data-text="temporary">temporary</span> space can hold other data</p>
+					<p class="fragment">What kind of data ?</p>
+				</section>
+				<section id="next-level-memory-map">
+				<h3>POKEMON MEMORY MAP (WRAM)</h3>
+				<div class="memory-map-container">
+					<table class="hex-table">
+					<thead>
+						<tr>
+						<th>ADDR</th>
+						<th>ZONE NAME</th>
+						<th>COMMENT</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="zone-party">
+						<td class="addr">D158 - D162</td>
+						<td>PLAYER'S NAME</td>
+						<td><pre><code>
+uint8_t name[10] = {0x92, 0x80, 0x8C, 0x50, ...};
+//Not ASCII
+						</code></pre>
+						</td>
+						</tr>
+						<tr class>
+						<td class="addr">D18D - D886</td>
+						<td>OTHER</td>
+						<td>...</td>
+						</tr>
+						<tr class="zone-wild">
+						<td class="addr" style="color:#ff00ff; text-shadow:0 0 5px #ff00ff;">D887 - D899</td>
+						<td>WILD DATA</td>
+						<td class="comment-cell"><pre>
+<code>
+wild_pokemon_t {
+	uint8_t level;
+	uint8_t pokemon_id;
+}
+wild_pokemon_t encounters[] = {
+	{0x03, 0x24}, {0x03, 0xA5},
+	{0x03, 0xA5}, {0x02, 0xA5},
+...}
+				</code></pre>
+						<div class="encounter-table-embedded">
+							<table class="retro-table-small">
+								<tbody>
+									<tr>
+										<td class="lvl-cell">LV 3</td>
+										<td class="sprite-cell"><img src="img/pokemon/16.png" class="poke-sprite-small" alt="Pidgey"></td>
+										<td class="lvl-cell">LV 3</td>
+										<td class="sprite-cell"><img src="img/pokemon/19.png" class="poke-sprite-small" alt="Rattata"></td>
+										<td class="lvl-cell">LV 3</td>
+										<td class="sprite-cell"><img src="img/pokemon/19.png" class="poke-sprite-small" alt="Rattata"></td>
+										<td class="lvl-cell">LV 2</td>
+										<td class="sprite-cell"><img src="img/pokemon/19.png" class="poke-sprite-small" alt="Rattata"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+				
+				</section>
+
+				<section id="next-level-after-tutorial">
+				<h3>AFTER: Catch Tutorial Writes Player's Name to D887</h3>
+				<div class="memory-map-container">
+					<table class="hex-table">
+					<thead>
+						<tr>
+						<th>ADDR</th>
+						<th>ZONE NAME</th>
+						<th>COMMENT</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="zone-party">
+						<td class="addr">D158 - D162</td>
+						<td>PLAYER'S NAME</td>
+						<td><pre><code>
+uint8_t name[10] = {0x8E, 0x8B, 0x83, 0x7F,
+	0x8C, 0x80, 0x8D, 0x50, ...};
+// OLD MAN</code></pre>
+						</td>
+						</tr>
+						<tr class>
+						<td class="addr">D18D - D886</td>
+						<td>OTHER</td>
+						<td>...</td>
+						</tr>
+						<tr class="zone-wild">
+						<td class="addr" style="color:#ff00ff; text-shadow:0 0 5px #ff00ff;">D887 - D899</td>
+						<td>WILD DATA</td>
+						<td class="comment-cell"><pre>
+<code>
+wild_pokemon_t encounters[] = {
+	{0x80, 0x8C, ...},
+}
+				</code></pre>
+						<div class="encounter-table-embedded fragment" data-fragment-index="3">
+							<table class="retro-table-small">
+								<tbody>
+									<tr>
+										<td class="lvl-cell">LV 128</td>
+										<td class="sprite-cell"><img src="img/pokemon/0.png" class="poke-sprite-small" alt="MissingNo"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+				
+				</section>
+
+
+				<section id="next-level-encounter-reset">
+					<p>The encounter table is reset when the player changes zone</p>
+					<p class="fragment">But flying to another city does not count as a zone change</p>
+				</section>
+
+				<section id="next-level-bug-feature">
+					<h4>A BUG ? NO A FEATURE</h4>
+					<p>1. Getting rare Pokémon</p>
+					<p>2. Item duplication: <span class="glitch" data-text="arbitrary code execution">a gateway to more crazy stuff</span></p>
+				</section>
+
+				<section id="next-level-rare-pokemon">
+					<h4>Getting rare Pokémon</h4>
+					<p>Encouters can be manipulated via player's name</p>
+				</section>
+				<section id="next-level-trade-evolution">
+					<div style="display: flex; justify-content: center; align-items: center; gap: 50px; margin-top: 50px;">
+						<div class="fragment" data-fragment-index="0">
+							<img src="img/pokemon/64.png" alt="Kadabra" style="width: 200px; height: 200px;">
+							<p>Kadabra</p>
+						</div>
+						<div class="fragment" data-fragment-index="1" style="font-size: 2em;">
+							→
+						</div>
+						<div class="fragment" data-fragment-index="2" id="trade-text" style="font-size: 1.5em; color: #ffd700; min-width: 400px; text-align: center;">
+							TRADE WITH A FRIEND VIA LINK CABLE
+						</div>
+						<!-- Hidden fragments to trigger text updates -->
+						<div class="fragment" data-fragment-index="5" style="display: none;"></div>
+						<div class="fragment" data-fragment-index="6" style="display: none;"></div>
+						<div class="fragment" data-fragment-index="3" style="font-size: 2em;">
+							→
+						</div>
+						<div class="fragment" data-fragment-index="4">
+							<img src="img/pokemon/65.png" alt="Alakazam" style="width: 200px; height: 200px;">
+							<p>Alakazam</p>
+						</div>
+					</div>
+				</section>
+				<section id="next-level-no-problem">
+					<h4>No problem !</h4>
+					<table class="hex-table" style="margin: 20px auto; width: 90%;">
+						<thead>
+							<tr>
+								<th style="border-right: 2px solid #00ff41;">name</th>
+								<th style="border-right: 2px solid #00ff41;">K</th>
+								<th style="border-right: 2px solid #00ff41;">E</th>
+								<th style="border-right: 2px solid #00ff41;">V</th>
+								<th style="border-right: 2px solid #00ff41;">I</th>
+								<th style="border-right: 2px solid #00ff41;">N</th>
+								<th style="border-right: 2px solid #00ff41;">&lt;EOS&gt;</th>
+								<th>&lt;NUL&gt;</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr>
+								<td style="border-right: 2px solid #333;"><strong>value</strong></td>
+								<td style="border-right: 2px solid #333;">0x8A</td>
+								<td style="border-right: 2px solid #333;">0x84</td>
+								<td style="border-right: 2px solid #333;">0x95</td>
+								<td style="border-right: 2px solid #333;">0x88</td>
+								<td style="border-right: 2px solid #333;">0x8D</td>
+								<td style="border-right: 2px solid #333;">0x50</td>
+								<td>0x00</td>
+							</tr>
+							<tr>
+								<td style="border-right: 2px solid #333;"><strong>encounters</strong></td>
+								<td style="border-right: 2px solid #333;"></td>
+								<td style="border-right: 2px solid #333;">LV 132</td>
+								<td style="border-right: 2px solid #333;"><img src="img/pokemon/65.png" class="poke-sprite-small" alt="Alakazam"></td>
+								<td style="border-right: 2px solid #333;">LV 136</td>
+								<td style="border-right: 2px solid #333;"><img src="img/pokemon/101.png" class="poke-sprite-small" alt="Electrode"></td>
+								<td style="border-right: 2px solid #333;">LV 80</td>
+								<td><img src="img/pokemon/0.png" class="poke-sprite-small" alt="MissingNo"></td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section id="next-level-item-duplication">
+					<h4>Item duplication</h4>
+					<table class="hex-table" style="margin: 20px auto; width: 90%;">
+						<thead>
+							<tr>
+								<th colspan="7" style="border-right: 2px solid #00ff41; text-align: center;">Inventory</th>
+							</tr>
+							<tr>
+								<th style="border-right: 2px solid #00ff41;">size</th>
+								<th colspan="2" style="border-right: 2px solid #00ff41;">item1</th>
+								<th colspan="2" style="border-right: 2px solid #00ff41;">item2</th>
+								<th colspan="2">... | EOL</th>
+							</tr>
+							<tr>
+								<th style="border-right: 2px solid #00ff41;">size</th>
+								<th style="border-right: 2px solid #00ff41;">qty</th>
+								<th style="border-right: 2px solid #00ff41;">id</th>
+								<th style="border-right: 2px solid #00ff41;">qty</th>
+								<th style="border-right: 2px solid #00ff41;">id</th>
+								<th colspan="2">... | EOL</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr> <!---Inventory exemple visual representation-->
+								<td style="border-right: 2px solid #333;">2</td>
+								<td style="border-right: 2px solid #333;">30</td>
+								<td style="border-right: 2px solid #333;"><img src="img/items/poke-ball.png" class="poke-sprite-small" alt="Poké Ball"></td>
+								<td style="border-right: 2px solid #333;">12</td>
+								<td style="border-right: 2px solid #333;"><img src="img/items/potion.png" class="poke-sprite-small" alt="Potion"></td>
+								<td colspan="2">End of item list</td>
+							</tr>
+							<tr> <!---Inventory exemple byte representation-->
+								<td style="border-right: 2px solid #333;">0x02</td>
+								<td style="border-right: 2px solid #333;">0x1E</td>
+								<td style="border-right: 2px solid #333;">0x04</td>
+								<td style="border-right: 2px solid #333;">0x0C</td>
+								<td style="border-right: 2px solid #333;">0x14</td>
+								<td colspan="2">0xFF</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section id="next-level-memory-corruption">
+					<h4>Contiguous memory space corruption</h4>
+					<p class="fragment">Each time a Pokémon is encountered: set bit in Pokedex memory region (D30A-D31C)</p>
+					<p class="fragment">Inventory (D31D) is contiguous to Pokedex in memory</p>
+					<p class="fragment">Encounter flag for MISSINGNO is set AFTER the Pokedex memory region</p>
+				</section>
+				<section id="next-level-memory-corruption-table" data-center="false">
+					<table class="hex-table" style="margin: 20px 0; width: 100%; font-size: 0.7em;">
+						<thead>
+							<tr>
+								<th style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;"></th>
+								<th colspan="3" style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">pokedex</th>
+								<th colspan="7" style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">inventory</th>
+							</tr>
+							<tr>
+								<td style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;"></td>
+								<td style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">1-8</td>
+								<td style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">...</td>
+								<td style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">145-152</td>
+								<td style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">size</td>
+								<td colspan="2" style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">item1</td>
+								<td style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">...</td>
+								<td colspan="2" style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">item6</td>
+							</tr>
+							<tr>
+								<td style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;"></td>
+								<td style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">1-8</td>
+								<td style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">...</td>
+								<td style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">145-152</td>
+								<td style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">size</td>
+								<td style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">qty</td>
+								<td style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">id</td>
+								<td style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">...</td>
+								<td style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">qty</td>
+								<td style="border-right: 2px solid #00ff41; border-bottom: 2px solid #00ff41;">id</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td rowspan="2" style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;"><strong>before MissingNo</strong></td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">0b00111001</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">...</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">0b01101000</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">0b00001010</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">0b00110000</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">0b00000100</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">...</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">0b00000001</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">0b00000001</td>
+							</tr>
+							<tr>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333; line-height: 0.5;"><img src="img/pokemon/1.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="Bulbasaur"><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"><img src="img/pokemon/4.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="Charmander"><br><img src="img/pokemon/5.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="Charmeleon"><img src="img/pokemon/6.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="Charizard"><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"></td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">...</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333; line-height: 0.5;"><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"><img src="img/pokemon/148.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="Dragonair"><br><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"><img src="img/pokemon/150.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="Mewtwo"><img src="img/pokemon/151.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="Mew"><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"></td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">10</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">48</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;"><img src="img/items/poke-ball.png" class="poke-sprite-small" alt="Poké Ball"></td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">...</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">1</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;"><img src="img/items/master-ball.png" class="poke-sprite-small" alt="Master Ball"></td>
+							</tr>
+							<tr class="fragment">
+								<td rowspan="2" style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;"><strong>after MissingNo</strong></td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">0b00111001</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">...</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">0b01101000</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">0b00001010</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">0b00110000</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">0b00000100</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">...</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">0b00000001 + <span color="red">0b10000000</span></td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">0b00000001</td>
+							</tr>
+							<tr class="fragment">
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333; line-height: 0.5;"><img src="img/pokemon/1.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="Bulbasaur"><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"><img src="img/pokemon/4.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="Charmander"><br><img src="img/pokemon/5.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="Charmeleon"><img src="img/pokemon/6.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="Charizard"><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"></td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">...</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333; line-height: 0.5;"><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"><img src="img/pokemon/148.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="Dragonair"><br><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"><img src="img/pokemon/150.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="Mewtwo"><img src="img/pokemon/151.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="Mew"><img src="img/pokemon/0.png" style="width: 32px; height: 32px; margin: 0; padding: 0; display: inline-block; vertical-align: top;" alt="?"></td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">10</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">48</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;"><img src="img/items/poke-ball.png" class="poke-sprite-small" alt="Poké Ball"></td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;">...</td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;"><strong>128</strong></td>
+								<td style="border-right: 2px solid #333; border-top: 2px solid #333; border-bottom: 2px solid #333;"><img src="img/items/master-ball.png" class="poke-sprite-small" alt="Master Ball"></td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+			</section>
+			<section id="ace">
+				<section id="ace-intro">
+					<h2>ACE</h2>
+					<p><span class="fragment">Arbitrary</span> <span class="fragment">Code</span> <span class="fragment">Execution</span></p>
+				</section>
+				<section id="ace-single-byte">
+					<h4>Writing a single byte to memory</h4>
+					<p>Max item quantity in game: x99</p>
+					<p class="fragment" data-fragment-index="1">MissingNo glitch up to: x255</p>
+					<p class="fragment" data-fragment-index="2"><span class="glitch" data-text="Underflow">Underflow</span> by manipulating the inventory</p>
+					<p class="fragment" data-fragment-index="3">Writing the player's cordinate in the inventory as a specific item</p>
+					<video class="fragment" data-fragment-index="3" muted data-autoplay src="img/item_underflow.mp4"></video>
+					<h3 class="fragment" data-fragment-index="4">8F</h3>
+				</section>
+				<section id="ace-8f-gateway">
+					<h4>8F: the gateway to ACE</h4>
+					<p>Each item (menu or inventory) is associated to an <u>effect pointer</u></p>
+					<h4>8F in game effect:</h4>
+						<ol>
+							<li><u>Jump to some address</u> <span class="fragment">(the "moveTo8F" function)</span> in RAM</li>
+							<li>And execute the code located here</li>
+						</ol>
+					<h4>8F in inventory effect:</h4>
+					<ol>
+						<li><u>Jump to some address</u> <span class="fragment">(the player's party)</span></li>
+						<li>And execute the <span class="glitch" data-text="code">data</span> located here</li>
+					</ol>
+				</section>
+				<section id="ace-party">
+					<h4>The party</h4>
+					<table class="hex-table" style="margin: 10px auto; width: 90%; font-size: 0.65em; line-height: 1.0;">
+					<thead>
+						<tr>
+							<th style="border-right: 2px solid #00ff41; padding: 3px 6px;">Memory area</th>
+							<th style="border-right: 2px solid #00ff41; padding: 3px 6px;">Address</th>
+							<th style="border-right: 2px solid #00ff41; padding: 3px 6px;">Description</th>
+							<th style="border-right: 2px solid #00ff41; padding: 3px 6px;">Visual</th>
+							<th style="padding: 3px 6px;">Value hex</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td rowspan="8" style="border-right: 2px solid #333; border-bottom: 2px solid #00ff41; padding: 2px 6px; vertical-align: middle;">Party</td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;"><code class="addr">D163</code></td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;">Party Size</td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;">—</td>
+							<td style="padding: 2px 6px;">0x05</td>
+						</tr>
+						<tr>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;"><code class="addr">D164</code></td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;">Pokémon 1 ID</td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;"><img src="img/pokemon/16.png" class="poke-sprite-small" alt="Pidgey" style="width: 49px; height: 49px;"></td>
+							<td style="padding: 2px 6px;">0x24</td>
+						</tr>
+						<tr>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;"><code class="addr">D165</code></td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;">Pokémon 2 ID</td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;"><img src="img/pokemon/47.png" class="poke-sprite-small" alt="Parasect" style="width: 49px; height: 49px;"></td>
+							<td style="padding: 2px 6px;">0x2E</td>
+						</tr>
+						<tr>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;"><code class="addr">D166</code></td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;">Pokémon 3 ID</td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;"><img src="img/pokemon/95.png" class="poke-sprite-small" alt="Onix" style="width: 49px; height: 49px;"></td>
+							<td style="padding: 2px 6px;">0x22</td>
+						</tr>
+						<tr>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;"><code class="addr">D167</code></td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;">Pokémon 4 ID</td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;"><img src="img/pokemon/72.png" class="poke-sprite-small" alt="Tentacool" style="width: 49px; height: 49px;"></td>
+							<td style="padding: 2px 6px;">0x18</td>
+						</tr>
+						<tr>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;"><code class="addr">D168</code></td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;">Pokémon 5 ID</td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;"><img src="img/pokemon/115.png" class="poke-sprite-small" alt="Kangaskhan" style="width: 49px; height: 49px;"></td>
+							<td style="padding: 2px 6px;">0x02</td>
+						</tr>
+						<tr>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;"><code class="addr">D169</code></td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;">Pokémon 6 ID</td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;">—</td>
+							<td style="padding: 2px 6px;">0xFF</td>
+						</tr>
+						<tr>
+							<td style="border-right: 2px solid #333; border-bottom: 2px solid #00ff41; padding: 2px 6px;"><code class="addr">D16A</code></td>
+							<td style="border-right: 2px solid #333; border-bottom: 2px solid #00ff41; padding: 2px 6px;">End of list</td>
+							<td style="border-right: 2px solid #333; border-bottom: 2px solid #00ff41; padding: 2px 6px;">—</td>
+							<td style="border-bottom: 2px solid #00ff41; padding: 2px 6px;">0xFF</td>
+						</tr>
+						<tr>
+							<td rowspan="3" style="border-right: 2px solid #333; padding: 2px 6px; vertical-align: middle;">Party status</td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;"><code class="addr">D16B</code></td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;">Pokemon 1 ID</td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;"><img src="img/pokemon/16.png" class="poke-sprite-small" alt="Pidgey" style="width: 49px; height: 49px;"></td>
+							<td style="padding: 2px 6px;">0x24</td>
+						</tr>
+						<tr>
+							<td style="border-right: 2px solid #333; padding: 0px 0px;"><code class="addr">D16C-D16D</code></td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;">Pokemon 1 current HP</td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px; text-align: center;"><div style="display: inline-block; width: 120px; height: 18px; background-color: #222; border: 1px solid #00ff41; position: relative; vertical-align: middle;"><div style="width: 100%; height: 100%; background-color: #00ff41; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #000; font-weight: bold; font-family: 'Courier New', monospace;">233/233</div></div></td>
+							<td style="padding: 2px 6px;">0x00 0xE9</td>
+						</tr>
+						<tr>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;">...</td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;">...</td>
+							<td style="border-right: 2px solid #333; padding: 2px 6px;">...</td>
+							<td style="padding: 2px 6px;">...</td>
+						</tr>
+					</tbody>
+					</table>
+				</section>
+				<section id="ace-bootstrap">
+					<h4>Bootstrap code</h4>
+					<div style="margin-bottom: 20px;">
+						<table class="hex-table" style="margin: 10px auto; width: auto; font-size: 0.65em;">
+						<thead>
+							<tr>
+								<th colspan="3" style="border-bottom: 2px solid #00ff41; padding: 6px 8px;">Registers</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="border-right: 2px solid #333; padding: 4px 8px; font-weight: bold;">PC</td>
+								<td style="padding: 4px 8px;">
+									<span id="reg-pc" style="display: inline-block; min-width: 80px;"><code>0xD163</code></span>
+								</td>
+							</tr>
+							<tr>
+								<td rowspan="2" style="border-right: 2px solid #333; padding: 4px 8px; font-weight: bold; vertical-align: middle;">HL</td>
+								<td style="border-right: 2px solid #333; padding: 4px 8px;">
+									<span id="reg-h" style="display: inline-block; min-width: 50px;"><code>0xD1</code></span>
+								</td>
+								<td style="padding: 4px 8px;">
+									<span id="reg-l" style="display: inline-block; min-width: 50px;"><code>0x63</code></span>
+								</td>
+							</tr>
+							<tr>
+								<td style="border-right: 2px solid #333; padding: 4px 8px; font-weight: bold; font-size: 0.9em;">H</td>
+								<td style="padding: 4px 8px; font-weight: bold; font-size: 0.9em;">L</td>
+							</tr>
+						</tbody>
+						</table>
+					</div>
+					<table class="hex-table" style="margin: 20px auto; width: 95%; font-size: 0.65em;">
+					<thead>
+						<tr>
+							<th style="border-right: 2px solid #00ff41; padding: 6px 8px;">Address</th>
+							<th style="border-right: 2px solid #00ff41; padding: 6px 8px;">Visual</th>
+							<th style="border-right: 2px solid #00ff41; padding: 6px 8px;">Opcode</th>
+							<th style="border-right: 2px solid #00ff41; padding: 6px 8px;">ASM</th>
+							<th style="padding: 6px 8px;">C</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr id="code-row-D163">
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code class="addr">D163</code></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;">—</td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code>0x05</code></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><span class="fragment" data-fragment-index="1"><code>dec B</code></span></td>
+							<td style="padding: 4px 8px;"><span class="fragment" data-fragment-index="1"><code>B--;</code></span></td>
+						</tr>
+						<tr id="code-row-D164">
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code class="addr">D164</code></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><img src="img/pokemon/16.png" class="poke-sprite-small" alt="Pidgey" style="width: 49px; height: 49px;"></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code>0x24</code></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><span class="fragment" data-fragment-index="2"><code>inc H</code></span></td>
+							<td style="padding: 4px 8px;"><span class="fragment" data-fragment-index="2"><code>H++;</code></span></td>
+						</tr>
+						<tr id="code-row-D165">
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code class="addr">D165</code></td>
+							<td rowspan="2" style="border-right: 2px solid #333; padding: 4px 8px; vertical-align: middle; text-align: center;"><img src="img/pokemon/47.png" class="poke-sprite-small" alt="Parasect" style="width: 49px; height: 49px;"><img src="img/pokemon/95.png" class="poke-sprite-small" alt="Onix" style="width: 49px; height: 49px;"></td>
+							<td rowspan="2" style="border-right: 2px solid #333; padding: 4px 8px; vertical-align: middle;"><code>0x2E 0x22</code></td>
+							<td rowspan="2" style="border-right: 2px solid #333; padding: 4px 8px; vertical-align: middle;"><span class="fragment" data-fragment-index="3"><code>ld L, 0x22</code></span></td>
+							<td rowspan="2" style="padding: 4px 8px; vertical-align: middle;"><span class="fragment" data-fragment-index="3"><code>L = 0x22;</code></span></td>
+						</tr>
+						<tr id="code-row-D166">
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code class="addr">D166</code></td>
+						</tr>
+						<tr id="code-row-D167">
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code class="addr">D167</code></td>
+							<td rowspan="2" style="border-right: 2px solid #333; padding: 4px 8px; vertical-align: middle; text-align: center;"><img src="img/pokemon/72.png" class="poke-sprite-small" alt="Tentacool" style="width: 49px; height: 49px;"><img src="img/pokemon/115.png" class="poke-sprite-small" alt="Kangaskhan" style="width: 49px; height: 49px;"></td>
+							<td rowspan="2" style="border-right: 2px solid #333; padding: 4px 8px; vertical-align: middle;"><code>0x18 0x02</code></td>
+							<td rowspan="2" style="border-right: 2px solid #333; padding: 4px 8px; vertical-align: middle;"><span class="fragment" data-fragment-index="4"><code>jr 2</code></span></td>
+							<td rowspan="2" style="padding: 4px 8px; vertical-align: middle;"><span class="fragment" data-fragment-index="4"><code>PC += 2; goto PC;</code></span></td>
+						</tr>
+						<tr id="code-row-D168">
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code class="addr">D168</code></td>
+						</tr>
+						<tr id="code-row-D169">
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code class="addr">D169</code></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;">—</td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code>0xFF</code></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><span style="color: #666; font-style: italic;"></span></td>
+							<td style="padding: 4px 8px;"><span style="color: #666; font-style: italic;"></span></td>
+						</tr>
+						<tr id="code-row-D16A">
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code class="addr">D16A</code></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;">—</td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code>0xFF</code></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><span style="color: #666; font-style: italic;"></span></td>
+							<td style="padding: 4px 8px;"><span style="color: #666; font-style: italic;"></span></td>
+						</tr>
+						<tr id="code-row-D16B">
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code class="addr">D16B</code></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><img src="img/pokemon/16.png" class="poke-sprite-small" alt="Pidgey" style="width: 49px; height: 49px;"></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code>0x24</code></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><span class="fragment" data-fragment-index="6"><code>inc H</code></span></td>
+							<td style="padding: 4px 8px;"><span class="fragment" data-fragment-index="6"><code>H++;</code></span></td>
+						</tr>
+						<tr id="code-row-D16C">
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code class="addr">D16C</code></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;">—</td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code>0x00</code></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><span class="fragment" data-fragment-index="7"><code>nop</code></span></td>
+							<td style="padding: 4px 8px;"><span class="fragment" data-fragment-index="7"><code>;</code></span></td>
+						</tr>
+						<tr id="code-row-D16D">
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code class="addr">D16D</code></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px; vertical-align: middle;"><div style="display: inline-block; width: 80px; height: 12px; background-color: #222; border: 1px solid #00ff41; position: relative; vertical-align: middle;"><div style="width: 100%; height: 100%; background-color: #00ff41; display: flex; align-items: center; justify-content: center; font-size: 8px; color: #000; font-weight: bold; font-family: 'Courier New', monospace;">233/233</div></div></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code>0xE9</code></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><span class="fragment" data-fragment-index="8"><code>jp HL</code></span></td>
+							<td style="padding: 4px 8px;"><span class="fragment" data-fragment-index="8"><code>PC = HL; goto PC;</code></span></td>
+						</tr>
+						<tr id="code-row-D322" class="fragment" data-fragment-index="9" style="display: none;">
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"><code class="addr">D322</code></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"></td>
+							<td style="border-right: 2px solid #333; padding: 4px 8px;"></td>
+							<td style="padding: 4px 8px;"></td>
+						</tr>
+					</tbody>
+					</table>
+				</section>
+				<section id="ace-pc-d322">
+					<h4>PC = D322</h4>
+					<p>Execute <span class="glitch" data-text="data">code</span> from the 3rd inventory slot</p>
+					<p>Run anything by manipulating inventory (quantities and IDs):</p>
+					<ul class="fragment">
+						<li>From in-game mechanics: buy or drop items</li>
+						<li>Or from MISSINGNO's item duplication</li>
+					</ul>
+				</section>
+				<section id="ace-demo2">
+					<h4>Demo</h4>
+					<iframe id="demo2-iframe" src="" width="100%" height="600px" frameborder="0"></iframe>
+				</section>
+				<section id="ace-total-control">
+					<h4>TOTAL CONTROL</h4>
+					<p>One step further</p>
+					<p>Inventory is limited to 37 usable bytes</p>
+					<p>Stored Pokemon (Box) is 1121 bytes</p>
+				</section>
+				<section id="ace-fast-forward">
+					<h4>FAST FORWARD</h4>
+					<ul>
+						<li class="fragment">Encounter MISSINGNO to duplicate items in slot 6</li>
+						<li class="fragment">Manipulate inventory via in-game mechanics to get 8F</li>
+						<li class="fragment">Use in-game mechanics to gather a bootstrap Party</li>
+						<li class="fragment">Use 8F to jump PC to the Party</li>
+						<li class="fragment">Use Party to jump PC to 3rd item slot</li>
+						<li class="fragment">Write a much bigger code to Stored Pokemon memory region</li>
+						<li class="fragment">Manipulate inventory to jump PC to Stored Pokemon memory region</li>
+					</ul>
+				</section>
+				<section id="ace-demo3">
+					<h4>Demo</h4>
+					<iframe id="demo3-iframe" src="" width="100%" height="600px" frameborder="0"></iframe>
+				</section>
+				<section id="ace-legacy">
+					<h4>Legacy</h4>
+					<p class="fragment">Game re-released (unmodified) on 3DS in 2016</p>
+					<p class="fragment">Can connect to modern Pokémon Games</p>
+				</section>
+				<section id="ace-demo4">
+					<h4>"One more thing"</h4>
+					<iframe id="demo4-iframe" src="" width="100%" height="600px" frameborder="0"></iframe>
+				</section>
+			</section>
+			<section id="sources">
+				<h3>Sources</h3>
+				<style>
+					#sources .hex-table a {
+						color: #00ff41;
+						text-decoration: underline;
+						font-weight: bold;
+					}
+					#sources .hex-table a:hover {
+						color: #00ff88;
+						text-shadow: 0 0 5px #00ff41;
+					}
+				</style>
+				<table class="hex-table" style="margin: 20px auto; width: 90%; font-size: 0.8em;">
+					<thead>
+						<tr>
+							<th style="border-right: 2px solid #00ff41; padding: 8px;">Category</th>
+							<th style="border-right: 2px solid #00ff41; padding: 8px;">Title</th>
+							<th style="padding: 8px;">Link</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td rowspan="4" style="border-right: 2px solid #333; padding: 8px; vertical-align: middle; font-weight: bold;">Pac-Man</td>
+							<td style="border-right: 2px solid #333; padding: 8px;">How High Can You Get</td>
+							<td style="padding: 8px;"><a href="http://donhodges.com/how_high_can_you_get2.htm" target="_blank" rel="noopener noreferrer">donhodges.com</a></td>
+						</tr>
+						<tr>
+							<td style="border-right: 2px solid #333; padding: 8px;">Pac-Man Kill Screen Explained - @RGMechEx</td>
+							<td style="padding: 8px;"><a href="https://www.youtube.com/watch?v=NKKfW8X9uYk" target="_blank" rel="noopener noreferrer">youtu.be/NKKfW8X9uYk</a></td>
+						</tr>
+						<tr>
+							<td style="border-right: 2px solid #333; padding: 8px;">Pac-Man - Perfect Game 3,333,360 - @jameypittman</td>
+							<td style="padding: 8px;"><a href="https://www.youtube.com/watch?v=AuoH0vz3Mqk&t=18864s" target="_blank" rel="noopener noreferrer">youtu.be/AuoH0vz3Mqk</a></td>
+						</tr>
+						<tr>
+							<td style="border-right: 2px solid #333; padding: 8px;">PAC-MAN 256</td>
+							<td style="padding: 8px;"><a href="https://store.steampowered.com/app/455400/PACMAN_256/" target="_blank" rel="noopener noreferrer">Steam Store</a></td>
+						</tr>
+						<tr>
+							<td rowspan="5" style="border-right: 2px solid #333; padding: 8px; vertical-align: middle; font-weight: bold;">Pokémon</td>
+							<td style="border-right: 2px solid #333; padding: 8px;">Bulbapedia</td>
+							<td style="padding: 8px;"><a href="https://bulbapedia.bulbagarden.net/" target="_blank" rel="noopener noreferrer">bulbapedia.bulbagarden.net</a></td>
+						</tr>
+						<tr>
+							<td style="border-right: 2px solid #333; padding: 8px;">Glitch City Wiki</td>
+							<td style="padding: 8px;"><a href="https://glitchcity.wiki/" target="_blank" rel="noopener noreferrer">glitchcity.wiki</a></td>
+						</tr>
+						<tr>
+							<td style="border-right: 2px solid #333; padding: 8px;">Data Crystal</td>
+							<td style="padding: 8px;"><a href="https://datacrystal.tcrf.net" target="_blank" rel="noopener noreferrer">datacrystal.tcrf.net</a></td>
+						</tr>
+						<tr>
+							<td style="border-right: 2px solid #333; padding: 8px;">8F Memory Editor - @TheZZAZZGlitch</td>
+							<td style="padding: 8px;"><a href="https://www.youtube.com/watch?v=6NuisafQBkc" target="_blank" rel="noopener noreferrer">youtu.be/6NuisafQBkc</a></td>
+						</tr>
+						<tr>
+							<td style="border-right: 2px solid #333; padding: 8px;">Pokémon Red Disassembly</td>
+							<td style="padding: 8px;"><a href="https://github.com/pret/pokered" target="_blank" rel="noopener noreferrer">github.com/pret/pokered</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<section>
+				<h3>Presentation Repository</h3>
+				<p>Presentation will be made public (in a few minutes/hours)</p>
+				<p style="font-size: 1.2em; margin: 20px 0;">
+					<a href="https://github.com/kevin-cazal/talk-summit-public" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: underline; font-weight: bold;">
+						https://github.com/kevin-cazal/talk-summit-public
+					</a>
+				</p>
+				<div style="margin: 30px 0;">
+					<img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://github.com/kevin-cazal/talk-summit-public" alt="QR Code for GitHub repository" style="border: 3px solid #00ff41; padding: 10px; background: white;">
+				</div>
+			</section>
+		</section>
+	</div>
+</section>
+
+		</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+			showHiddenSlides: true,
+
+			slideNumber: 'c/t',
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+			katex: {
+				trust: true,
+			}
+		});
+
+		// Handle text strike-through animation
+		const tradeText = document.getElementById('trade-text');
+		
+		function updateTradeTextState() {
+			if (!tradeText) return;
+			
+			const currentSlide = Reveal.getCurrentSlide();
+			const fragment5 = currentSlide.querySelector('.fragment[data-fragment-index="5"]');
+			const fragment6 = currentSlide.querySelector('.fragment[data-fragment-index="6"]');
+			
+			if (fragment6 && fragment6.classList.contains('visible')) {
+				// Both struck through
+				tradeText.innerHTML = 'TRADE WITH A <s>FRIEND</s> VIA <s>LINK CABLE</s>';
+			} else if (fragment5 && fragment5.classList.contains('visible')) {
+				// Only LINK CABLE struck through
+				tradeText.innerHTML = 'TRADE WITH A FRIEND VIA <s>LINK CABLE</s>';
+			} else {
+				// Normal text
+				tradeText.innerHTML = 'TRADE WITH A FRIEND VIA LINK CABLE';
+			}
+		}
+		
+		Reveal.on('fragmentshown', event => {
+			const fragmentIndex = event.fragment.dataset.fragmentIndex;
+			if (fragmentIndex === '5' || fragmentIndex === '6') {
+				updateTradeTextState();
+			}
+		});
+
+		Reveal.on('fragmenthidden', event => {
+			const fragmentIndex = event.fragment.dataset.fragmentIndex;
+			if (fragmentIndex === '5' || fragmentIndex === '6') {
+				updateTradeTextState();
+			}
+		});
+		
+		Reveal.on('slidechanged', updateTradeTextState);
+
+		// Update register values in place based on fragment index
+		const registerValues = {
+			pc: {
+				0: '0xD163',
+				1: '0xD164',
+				2: '0xD165',
+				3: '0xD167',
+				4: '0xD16B',
+				5: '0xD16C',  // Fragment 5 shows "nop" at D16C, so highlight D16C
+				6: '0xD16D',  // Fragment 6 shows "jp HL" at D16D, so highlight D16D
+				7: '0xD322',  // After executing D16D (jp HL), PC jumps to D322
+				8: '0xD322',  // Keep for backward compatibility if fragment 8 exists
+				9: '0xD322'   // Final fragment showing PC at D322
+			},
+			hl: {
+				0: { hl: '0xD163', h: '0xD1', l: '0x63' },
+				2: { hl: '0xD263', h: '0xD2', l: '0x63' },
+				3: { hl: '0xD222', h: '0xD2', l: '0x22' },
+				5: { hl: '0xD322', h: '0xD3', l: '0x22' },  // HL value before jp HL at fragment 6
+				6: { hl: '0xD322', h: '0xD3', l: '0x22' }   // After jp HL, PC = HL = D322
+			}
+		};
+
+		function getCurrentPCValue(fragmentIndex) {
+			// Find the highest fragment index <= current that has a PC value
+			for (let i = fragmentIndex; i >= 0; i--) {
+				if (registerValues.pc.hasOwnProperty(i)) {
+					return registerValues.pc[i];
+				}
+			}
+			return '0xD163'; // default
+		}
+
+		function getCurrentHLValue(fragmentIndex) {
+			for (let i = fragmentIndex; i >= 0; i--) {
+				if (registerValues.hl.hasOwnProperty(i)) {
+					return registerValues.hl[i];
+				}
+			}
+			return { h: '0xD1', l: '0x63' }; // default
+		}
+
+		function highlightPCRow(pcValue) {
+			// Remove highlight from all rows
+			const allRows = document.querySelectorAll('[id^="code-row-"]');
+			allRows.forEach(row => {
+				row.style.backgroundColor = '';
+				row.style.borderLeft = '';
+			});
+
+			// Extract address from PC value (e.g., "0xD163" -> "D163")
+			const address = pcValue.replace('0x', '').toUpperCase();
+			const rowId = 'code-row-' + address;
+			let row = document.getElementById(rowId);
+			
+			// If row not found, try to find it (handles edge cases)
+			if (!row) {
+				// For D322, use the hidden row we added
+				if (address === 'D322') {
+					row = document.getElementById('code-row-D322');
+				}
+				// If still not found, default to D16D (last visible row)
+				if (!row) {
+					row = document.getElementById('code-row-D16D');
+				}
+			}
+			
+			if (row) {
+				row.style.backgroundColor = 'rgba(0, 255, 65, 0.15)'; // Green highlight
+				row.style.borderLeft = '3px solid #00ff41'; // Green left border
+			}
+		}
+
+		function updateRegisters(fragmentIndex) {
+			const regPC = document.getElementById('reg-pc');
+			const regH = document.getElementById('reg-h');
+			const regL = document.getElementById('reg-l');
+
+			if (!regPC || !regH || !regL) return;
+
+			// Update PC - always update based on current fragment index
+			const pcValue = getCurrentPCValue(fragmentIndex);
+			regPC.innerHTML = '<code>' + pcValue + '</code>';
+
+			// Update H and L separately
+			const hlValues = getCurrentHLValue(fragmentIndex);
+			regH.innerHTML = '<code>' + hlValues.h + '</code>';
+			regL.innerHTML = '<code>' + hlValues.l + '</code>';
+
+			// Highlight the PC row in the code table
+			highlightPCRow(pcValue);
+		}
+
+		Reveal.on('fragmentshown', event => {
+			const fragmentIndex = parseInt(event.fragment.dataset.fragmentIndex);
+			if (!isNaN(fragmentIndex)) {
+				updateRegisters(fragmentIndex);
+				// Show D322 row when fragment 9 is shown
+				if (fragmentIndex === 9) {
+					const d322Row = document.getElementById('code-row-D322');
+					if (d322Row) {
+						d322Row.style.display = '';
+					}
+				}
+			}
+		});
+		
+		function updateRegistersFromVisibleFragments() {
+			const currentSlide = Reveal.getCurrentSlide();
+			if (!currentSlide) return;
+			
+			const fragments = currentSlide.querySelectorAll('.fragment.visible');
+			let maxIndex = -1;
+			fragments.forEach(frag => {
+				const idx = parseInt(frag.dataset.fragmentIndex);
+				if (!isNaN(idx) && idx > maxIndex) {
+					maxIndex = idx;
+				}
+			});
+			updateRegisters(maxIndex >= 0 ? maxIndex : 0);
+		}
+
+		Reveal.on('fragmenthidden', event => {
+			const fragmentIndex = parseInt(event.fragment.dataset.fragmentIndex);
+			// Hide D322 row when fragment 9 is hidden
+			if (fragmentIndex === 9) {
+				const d322Row = document.getElementById('code-row-D322');
+				if (d322Row) {
+					d322Row.style.display = 'none';
+				}
+			}
+			updateRegistersFromVisibleFragments();
+		});
+
+		// Initialize registers on slide change
+		Reveal.on('slidechanged', event => {
+			updateRegistersFromVisibleFragments();
+		});
+
+		// Set iframe sources to use current hostname instead of localhost
+		(function() {
+			const protocol = window.location.protocol;
+			const hostname = window.location.hostname;
+			const demo1Iframe = document.getElementById('demo1-iframe');
+			const demo2Iframe = document.getElementById('demo2-iframe');
+			const demo3Iframe = document.getElementById('demo3-iframe');
+			const demo4Iframe = document.getElementById('demo4-iframe');
+			
+			if (demo1Iframe) {
+				demo1Iframe.src = `${protocol}//${hostname}:8080/demo1.html`;
+			}
+			if (demo2Iframe) {
+				demo2Iframe.src = `${protocol}//${hostname}:8081/demo2.html?fullSize=1`;
+			}
+			if (demo3Iframe) {
+				demo3Iframe.src = `${protocol}//${hostname}:8082/demo3.html?fullSize=1`;
+			}
+			if (demo4Iframe) {
+				demo4Iframe.src = `${protocol}//${hostname}:8083/demo4.html?fullSize=1`;
+			}
+		})();
+	</script>
+
+
+</body></html>

@@ -1,0 +1,582 @@
+/* --- VARIABLES --- */
+:root {
+  --bg-color: #050505;
+  --main-color: #e0e0e0;
+  --accent-color: #00ff41; /* Matrix Green */
+  --header-font: 'Press Start 2P', cursive;
+  --body-font: 'VT323', monospace;
+  --glitch-red: #ff00ff;
+  --glitch-blue: #00ffff;
+}
+
+/* --- BASE SETTINGS --- */
+.reveal {
+  background-color: var(--bg-color);
+  color: var(--main-color);
+  font-family: var(--body-font);
+  font-size: 36px; /* Plus grand car VT323 est fine */
+}
+
+/* --- CRT SCANLINE OVERLAY --- */
+/* Crée l'effet de vieil écran TV par dessus tout */
+.reveal::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 1000;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+
+/* --- TYPOGRAPHY --- */
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+  font-family: var(--header-font);
+  text-transform: uppercase;
+  color: var(--accent-color);
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.7); /* Glow effect */
+  line-height: 1.5;
+}
+
+.reveal h1 { font-size: 2.5em; margin-bottom: 30px; }
+.reveal h2 { font-size: 1.8em; color: #fff; }
+.reveal p, .reveal li { line-height: 1.4; letter-spacing: 1px; }
+
+/* --- CODE BLOCKS (STYLE TERMINAL) --- */
+.reveal pre {
+  box-shadow: 10px 10px 0px #222; /* Retro hard shadow */
+  width: 90%;
+}
+
+.reveal pre code {
+  background: #111;
+  border: 2px solid var(--accent-color);
+  color: #fff;
+  font-family: 'VT323', monospace;
+  font-size: 1.2em;
+  padding: 20px;
+  max-height: 500px;
+}
+
+/* Coloration syntaxique manuelle simple (si pas de highlight.js) */
+.hljs-keyword { color: var(--glitch-red); }
+.hljs-string { color: var(--glitch-blue); }
+.hljs-number { color: yellow; }
+
+/* --- GLITCH ANIMATION CLASS --- */
+/* Appliquez la classe "glitch" à vos <h1> ou <h2> pour l'activer */
+.glitch {
+  position: relative;
+  color: red;
+}
+
+.blink {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-color);
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -1px 0 var(--glitch-red);
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -1px 0 var(--glitch-blue);
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+/* --- MEMORY DUMP STYLE --- */
+/* Pour vos slides montrant la RAM */
+.memory-dump {
+  font-family: 'Courier New', monospace;
+  background-color: #000080; /* Blue Screen of Death Blue */
+  color: white;
+  padding: 10px;
+  border: 4px double white;
+  font-size: 0.8em;
+  text-align: left;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes glitch-anim {
+  0% { clip: rect(10px, 9999px, 30px, 0); transform: skew(0.5deg); }
+  5% { clip: rect(70px, 9999px, 80px, 0); transform: skew(0.5deg); }
+  10% { clip: rect(30px, 9999px, 10px, 0); transform: skew(0.5deg); }
+  15% { clip: rect(90px, 9999px, 20px, 0); transform: skew(0.5deg); }
+  20% { clip: rect(10px, 9999px, 60px, 0); transform: skew(0.5deg); }
+  100% { clip: rect(60px, 9999px, 70px, 0); transform: skew(0.5deg); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(60px, 9999px, 10px, 0); transform: skew(0.5deg); }
+  5% { clip: rect(20px, 9999px, 70px, 0); transform: skew(0.5deg); }
+  10% { clip: rect(90px, 9999px, 30px, 0); transform: skew(0.5deg); }
+  100% { clip: rect(10px, 9999px, 60px, 0); transform: skew(0.5deg); }
+}
+
+/* --- UI ELEMENTS --- */
+.reveal .progress { color: var(--accent-color); }
+.reveal .controls { color: var(--accent-color); }
+
+	/* --- General Table Styling --- */
+	.binary-ripple-table td {
+		padding: 0 5px;
+		transition: all 0.2s ease-in-out;
+	}
+
+	/* --- Visibility Rules --- */
+
+	/* Rule 1: Base state for results and carries is hidden */
+	.binary-ripple-table .result-bit.fragment,
+	.binary-ripple-table .carry-bit.fragment {
+		opacity: 0;
+	}
+
+	/* Rule 2: INPUTS must ALWAYS be visible, even before triggered */
+	.binary-ripple-table .input-bit.fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+		color: #ffffff !important;
+		/* Light color for visibility against dark background */
+	}
+
+	/* Make the "+" sign and input row labels visible */
+	.binary-ripple-table tr:nth-child(2) td:first-child,
+	.binary-ripple-table tr:nth-child(3) td:first-child {
+		color: #ffffff !important;
+	}
+
+	/* Make code tags visible against dark background */
+	code {
+		background-color: rgba(255, 255, 255, 0.1);
+		padding: 2px 4px;
+		border-radius: 3px;
+	}
+
+	/* Rule 3: Results become visible and stay visible */
+	.binary-ripple-table .result-bit.fragment.visible {
+		opacity: 1;
+	}
+
+	/* Rule 4: THE RIPPLE EFFECT
+   Carries are only visible while they are the 'current' active step.
+   Once the step passes, they hide again. */
+	.binary-ripple-table .carry-bit.fragment.visible {
+		opacity: 0.7;
+		/* Hidden by default even if "visible" class is present */
+	}
+
+	.binary-ripple-table .carry-bit.fragment.current-fragment {
+		opacity: 1 !important;
+		/* Only show if it's the CURRENT step */
+	}
+
+
+	/* --- Highlighting --- */
+
+	/* Fix code blocks: visibility, font size, no scroll, line numbers */
+	.reveal pre {
+		overflow: visible !important;
+		max-height: none !important;
+	}
+
+	.reveal pre code {
+		font-size: 0.6em !important;
+		/* Match terminal font size */
+		line-height: 1.1 !important;
+		overflow: visible !important;
+		max-height: none !important;
+		/* Remove scrolling */
+		color: #ffffff !important;
+		/* Ensure all text is visible */
+		background: #111 !important;
+		/* Dark background for contrast */
+		padding: 15px !important;
+		/* Consistent padding */
+		text-indent: 0 !important;
+		/* Remove any text indentation */
+	}
+
+	/* Remove excessive leading whitespace from code blocks */
+	.reveal pre {
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+
+	.reveal pre code {
+		display: block;
+		white-space: pre;
+		/* Preserve whitespace but allow proper alignment */
+	}
+
+	/* Make all syntax elements visible */
+	.reveal pre code .hljs,
+	.reveal pre code .hljs * {
+		color: inherit !important;
+	}
+
+	/* Ensure specific syntax elements have good contrast */
+	.reveal pre code .hljs-keyword {
+		color: #ff00ff !important;
+		/* Glitch red for keywords */
+	}
+
+	.reveal pre code .hljs-string {
+		color: #00ffff !important;
+		/* Glitch blue for strings */
+	}
+
+	.reveal pre code .hljs-number {
+		color: #ffff00 !important;
+		/* Yellow for numbers */
+	}
+
+	.reveal pre code .hljs-comment {
+		color: #888 !important;
+		/* Light gray for comments - visible but distinct */
+	}
+
+	.reveal pre code .hljs-title,
+	.reveal pre code .hljs-function {
+		color: #00ff41 !important;
+		/* Matrix green for functions */
+	}
+
+	.reveal pre code .hljs-variable,
+	.reveal pre code .hljs-attr,
+	.reveal pre code .hljs-name:not(.hljs-tag),
+	.reveal pre code .hljs-built_in,
+	.reveal pre code .hljs-params,
+	.reveal pre code .hljs-type {
+		color: #ffffff !important;
+		/* White for variables and unclassified text */
+	}
+
+	/* Make line numbers visible */
+	.reveal pre code .hljs-ln-numbers,
+	.reveal pre code .hljs-ln-n {
+		color: #666 !important;
+		/* Gray for line numbers - visible but not distracting */
+		padding-right: 10px !important;
+		text-align: right !important;
+	}
+
+	.reveal pre code .hljs-ln-code {
+		color: inherit !important;
+	}
+
+	/* Glitch color variants */
+	.glitch-blue {
+		color: #00ffff !important;
+		/* Blue base color */
+	}
+
+	.glitch-blue::before {
+		text-shadow: -1px 0 #00ffff !important;
+		/* Blue glitch shadow */
+	}
+
+	.glitch-blue::after {
+		text-shadow: -1px 0 #0088ff !important;
+		/* Darker blue glitch shadow */
+	}
+
+	.glitch-red {
+		color: #ff00ff !important;
+		/* Red/magenta base color */
+	}
+
+	.glitch-red::before {
+		text-shadow: -1px 0 #ff00ff !important;
+		/* Red glitch shadow */
+	}
+
+	.glitch-red::after {
+		text-shadow: -1px 0 #ff0088 !important;
+		/* Darker red glitch shadow */
+	}
+
+	/* The style applied to whatever is currently active in the sequence */
+	.binary-ripple-table .fragment.current-fragment {
+		transform: scale(1.15);
+		/* Slight pop */
+		font-weight: bold;
+	}
+
+
+	/* La ligne sélectionnée (quand on utilise data-line-numbers) */
+	.reveal .hljs-selection-line-hidden {
+		opacity: 0.2;
+		/* Rend les autres lignes très sombres */
+		filter: blur(2px);
+		/* Ajoute un flou pour l'effet vieux moniteur */
+	}
+
+
+	/* 1. La boite <pre> (le conteneur) */
+	.reveal pre {
+		/* Centre le BLOC au milieu de la diapo, mais... */
+		display: block;
+		margin: 0 auto;
+		width: 90%;
+		/* Largeur du bloc */
+
+		/* ... Force le TEXTE à l'intérieur à s'aligner à gauche */
+		text-align: left;
+	}
+
+
+	/* --- LAYOUT 2 COLONNES (FLEXBOX) --- */
+	.reveal .flex-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+		/* Aligner en haut */
+		gap: 20px;
+		/* Espace entre les deux blocs */
+		width: 95%;
+		margin: 0 auto;
+	}
+
+	.reveal .col-half {
+		flex: 1 1 48%;
+		/* Prend environ la moitié de l'espace */
+		max-width: 48%;
+	}
+
+	/* IMPORTANT : Surcharge le style par défaut des <pre> de Reveal
+   pour qu'ils rentrent bien dans la colonne de gauche */
+	.reveal .flex-container pre {
+		width: 100% !important;
+		margin: 0 !important;
+		box-sizing: border-box;
+		/* Pour que le padding ne casse pas la largeur */
+	}
+
+
+	/* --- STYLE DU RETRO TERMINAL (COLONNE DROITE) --- */
+	.retro-terminal {
+		background-color: #020c02;
+		/* Fond un peu plus vert que le code */
+		border: 3px dashed #00ff41;
+		/* Bordure style vieux moniteur */
+		padding: 15px;
+		font-family: 'VT323', monospace;
+		font-size: 0.6em;
+		line-height: 0.7;
+		text-align: left;
+		color: #00ff41;
+		/* Vert Matrix par défaut */
+		box-shadow: inset 0 0 15px #003b0f;
+		/* Lueur interne */
+		height: 100%;
+		/* Essaye de matcher la hauteur du code */
+		min-height: 300px;
+		overflow-y: auto;
+		/* Scroll si trop long */
+	}
+
+	/* Style des lignes dans le terminal */
+	.retro-terminal p {
+		margin: 5px 0;
+	}
+
+	/* Ajoute "> " devant les commandes */
+	.retro-terminal .prompt::before {
+		content: "> ";
+		color: #ff00ff;
+		/* Invite de commande en rose glitch */
+	}
+
+	/* Style pour les erreurs */
+	.retro-terminal .error {
+		color: #ff0000;
+		/* Rouge */
+		font-weight: bold;
+		text-shadow: 2px 2px #000;
+	}
+
+	.retro-terminal .system-msg {
+		color: yellow;
+		font-style: italic;
+	}
+
+	.retro-terminal .hex-dump {
+		color: cyan;
+	}
+
+	/* --- CURSEUR CLIGNOTANT --- */
+	.blinking-cursor {
+		display: inline-block;
+		width: 12px;
+		height: 1em;
+		background-color: #00ff41;
+		vertical-align: text-bottom;
+		/* Animation infinie */
+		animation: blink 1s step-end infinite;
+	}
+
+	@keyframes blink {
+
+		0%,
+		100% {
+			opacity: 1;
+		}
+
+		50% {
+			opacity: 0;
+		}
+	}
+
+  	/* --- MEMORY MAP TABLE STYLE --- */
+.memory-map-container {
+  font-family: 'VT323', monospace;
+  font-size: 0.75em; /* Un peu plus petit pour tout faire tenir */
+  width: 95%;
+  margin: 0 auto;
+  background-color: #050505;
+  border: 1px solid #333;
+  box-shadow: 10px 10px 0 #111;
+}
+
+.hex-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #bbb;
+}
+
+.hex-table th {
+  background-color: #111;
+  color: #00ff41; /* Vert Matrix */
+  border-bottom: 2px solid #00ff41;
+  padding: 10px;
+  text-align: left;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.8em;
+}
+
+.hex-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #222;
+  vertical-align: top;
+  line-height: 1.2;
+}
+
+/* Couleurs des adresses */
+.hex-table .addr {
+  font-family: 'Courier New', monospace;
+  color: #00ffff; /* Cyan */
+  font-weight: bold;
+  width: 25%;
+}
+
+/* Codes Couleurs des Zones (Bordures gauche) */
+.zone-audio   { border-left: 4px solid #ffff00; } /* Jaune */
+.zone-sprites { border-left: 4px solid #00ff41; } /* Vert */
+.zone-battle  { border-left: 4px solid #ff4444; background: rgba(50,0,0,0.1); } /* Rouge Danger */
+.zone-party   { border-left: 4px solid #00ccff; } /* Bleu */
+.zone-wild    { border-left: 4px solid #ff00ff; background: rgba(255, 0, 255, 0.1); } /* Rose Glitch */
+.zone-sram    { border-left: 4px solid #888; }    /* Gris */
+
+/* Typographie spécifique */
+.highlight-glitch { color: #ff00ff; font-weight: bold; }
+.highlight-danger { color: #ff4444; font-weight: bold; text-decoration: underline; }
+.highlight-code   { color: #00ff41; }
+.comment          { color: #666; font-style: italic; font-size: 0.9em; display:block; margin-top:3px;}
+
+/* Effet Hover */
+.hex-table tr:hover {
+  background-color: #1a1a1a;
+  cursor: crosshair;
+}
+
+/* --- ENCOUNTER TABLE EMBEDDED STYLES --- */
+.encounter-table-embedded {
+  margin-top: 15px;
+  background-color: #111;
+  border: 2px solid #00ff41;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+}
+
+.retro-table-small {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'VT323', monospace;
+  font-size: 14px;
+  color: #fff;
+}
+
+.retro-table-small th {
+  border-bottom: 1px solid #00ff41;
+  text-align: center;
+  padding: 5px;
+  color: #00ff41;
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  text-transform: uppercase;
+}
+
+.retro-table-small td {
+  vertical-align: middle;
+  text-align: center;
+  padding: 8px 10px;
+  border-right: 1px solid #00ff41;
+}
+
+.retro-table-small td:last-child {
+  border-right: none;
+}
+
+.lvl-cell {
+  color: #ff00ff;
+  font-weight: bold;
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.sprite-cell {
+  padding: 5px;
+}
+
+.poke-sprite-small {
+  width: 64px;
+  height: 64px;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 3px rgba(255,255,255,0.3));
+}
+
+.comment-cell pre code {
+  font-size: 28px;
+  line-height: 1.4;
+}
+
+.comment-cell {
+  font-size: 18px;
+}
+
+.comment-cell pre {
+  font-size: 28px;
+}
